@@ -7,6 +7,7 @@ import { BASE_URL } from "../utils/contants"
 const Login = () => {
     const [emailId, setEmailId] = useState('')
     const [password, setPassword] = useState('')
+    const [loginError, setLoginError] = useState('')
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -27,9 +28,10 @@ const Login = () => {
             })
             const userData = await res.json()
             dispatch(addUser(userData))
-            return navigate("/")
+            navigate("/")
         } catch (error) {
             console.log(error)
+            setLoginError('Invalid password or email')
         }
 
     }
@@ -67,6 +69,7 @@ const Login = () => {
                             <input type="password" className="grow" placeholder="password" value={password} onChange={(e) => { setPassword(e.target.value) }} />
                         </label>
                     </div>
+                    <p className="text-red-500">{loginError}</p>
                     <div className="card-actions justify-center">
                         <button className="btn btn-primary" onClick={login}>Login</button>
                     </div>
