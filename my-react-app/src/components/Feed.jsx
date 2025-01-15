@@ -27,6 +27,7 @@ const Feed = () => {
     }
 
     useEffect(() => {
+        console.log("use")
         getFeed()
     }, [])
 
